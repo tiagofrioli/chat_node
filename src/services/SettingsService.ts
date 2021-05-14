@@ -1,14 +1,16 @@
-import { getCustomRepository } from "typeorm";
-import SettingsRepository from "../repositories/SettingsRepository";
+import { Repository } from "typeorm";
+import Setting from "../entities/Setting";
 import { ISettingsCreate } from "./types";
 
 
 class SettingsService{
+
+  private settingsRepository: Repository<Setting>;
+
     async create({chat, username}: ISettingsCreate){
       
-    const settingsRepository = getCustomRepository(SettingsRepository);
 
-    const userExist = await settingsRepository.findOne({
+    const userExist = await this.settingsRepository.findOne({
       username
     }) ;
     
@@ -17,13 +19,13 @@ class SettingsService{
     }
 
     
-    const settings = settingsRepository.create({
+    const settings = this.settingsRepository.create({
       chat,
       username
     });
 
     
-    await settingsRepository.save(settings);
+    await this.settingsRepository.save(settings);
     return settings;
   }
 }
