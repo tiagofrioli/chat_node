@@ -1,6 +1,6 @@
 import { getCustomRepository, Repository } from "typeorm";
 import Message from "../entities/Message";
-import MessagesRepository from "../repositories/Messagesrepository";
+import MessagesRepository from "../repositories/MessagesRepository";
 import { IMessagesCreate } from "./types";
 
 
